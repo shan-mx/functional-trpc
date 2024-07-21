@@ -1,8 +1,8 @@
 # Functional tRPC
 
-This is a utility code snippet that helps you to define tRPC procedures in a functional way. It makes your code more flexible and easier to test.
+This is a utility code snippet that helps you to define tRPC procedures in a functional way.
 
-This patch will not break any existing code, but it will add a "server-action like" way to define your procedures.
+This patch will not break any existing code, but it will add a "server-action like" way to define your procedures, which makes your code more flexible and easier to test.
 
 _Note: This patch relies on the v11 version of tRPC._
 
@@ -11,6 +11,8 @@ _Note: This patch relies on the v11 version of tRPC._
 ### 1. Paste the code below into a `utils.ts` file
 
 ```typescript
+// utils.ts
+
 import type {
   AnyProcedureBuilder,
   inferProcedureBuilderResolverOptions,
@@ -81,6 +83,8 @@ export interface DefineAPI<InputType, Procedure extends AnyProcedureBuilder> {
 ### 2. Use the utility function `getProcedureWrappers` to create query and mutation wrappers for your procedures
 
 ```typescript
+// trpc.ts
+
 // Most of the code below is from create-t3-app
 import { initTRPC } from "@trpc/server";
 import superjson from "superjson";
@@ -123,6 +127,8 @@ export type PublicAPI<Input> = DefineAPI<Input, typeof publicProcedure>;
 ### 3. Use the `publicQuery` and `publicMutation` wrappers to define your functional APIs
 
 ```typescript
+// routers/post.ts
+
 import {
   type PublicAPI,
   createTRPCRouter,
